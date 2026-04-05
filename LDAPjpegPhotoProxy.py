@@ -7,7 +7,7 @@ class MyServerHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path.endswith('.jpg'):
             config = configparser.ConfigParser()
-            config.read('config.ini')
+            config.read('config/config.ini')
             ldap_uri = config.get('ldap', 'uri')
             ldap_username = config.get('ldap', 'username')
             ldap_password = config.get('ldap', 'password')
@@ -45,7 +45,7 @@ class MyServerHandler(http.server.BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read('config/config.ini')
     listen_address = config.get('http', 'listen')
     listen_port = config.getint('http', 'port')
     cert_file = config.get('http', 'cert')

@@ -6,14 +6,18 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
-# Install pip requirements
-COPY requirements.txt .
-RUN python -m pip install -r requirements.txt
-
+RUN mkdir /app
 WORKDIR /app
-COPY . /app
+
+# Install pip requirements
+COPY requirements.txt /app
+RUN python -m pip install -r /app/requirements.txt
 
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
+
+COPY LDAPjpegPhotoProxy.py /app
+RUN mkdir config
+COPY config/config-example.ini /app/config/config.ini
 
 CMD ["python", "LDAPjpegPhotoProxy.py"]
