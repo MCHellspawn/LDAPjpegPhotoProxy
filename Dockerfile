@@ -19,5 +19,4 @@ USER appuser
 COPY LDAPjpegPhotoProxy.py /app
 RUN mkdir config
 COPY config/config-example.ini /app/config/config.ini
-
-CMD ["python", "LDAPjpegPhotoProxy.py"]
+CMD ["sh", "-c", "python3 LDAPjpegPhotoProxy.py"]
